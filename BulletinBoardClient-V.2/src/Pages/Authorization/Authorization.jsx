@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { authorization } from '../../utils/api';
 
 export function Authorization() {
     const navigate = useNavigate();
@@ -29,32 +30,12 @@ export function Authorization() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
-            try {
-                const response = await fetch('http://127.0.0.1:8000/api/authorization', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: formData.email,
-                        password: formData.password
-                    }),
-                });
+            const response = await authorization(formData)
+            const data = await response.json();
 
-                if (!response.ok) {
-                    const result = await response.text();
-                    alert('Ошибка авторизации: ' + result);
-                    return;
-                }
-
-                const data = await response.json();
+            if (response.status === 200) {
                 localStorage.setItem('token', data.token)
-                alert('Авторизация успешна!');
                 navigate('/advertisement');
-            } catch (error) {
-                console.error('Ошибка при отправке запроса:', error);
-                alert('Произошла ошибка при авторизации');
             }
         }
     };
@@ -66,7 +47,7 @@ export function Authorization() {
 
     return (
         <>
-            <main className="container d-flex justify-content-center align-items-center registration">
+            <main className="container d-flex justify-content-center align-items-center registration" style={{ height: '90vh' }}>
                 <div className="card shadow p-4" style={{ width: '400px' }}>
                     <h2 className="text-center mb-4">Авторизация</h2>
                     <form onSubmit={handleSubmit}>

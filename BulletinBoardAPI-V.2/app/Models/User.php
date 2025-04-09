@@ -19,11 +19,11 @@ class User extends Authenticatable
 
     public function ads()
     {
-        return $this->hasMany(Ad::class, 'user_id');
+        return $this->hasMany(Advertisement::class, 'user_id');
     }
 
     public function likedAds()
     {
-        return $this->belongsToMany(Ad::class, 'likes_users', 'user_id', 'ad_id');
+        return $this->belongsToMany(Advertisement::class, 'likes_users', 'user_id', 'advertisement_id');
     }
 }

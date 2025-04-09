@@ -16,7 +16,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="*" element={<h1>Страница не найдена</h1>} />
-        <Route path='/' element={<Navigate to='/registration' />} />
+        <Route path='/' element={<Navigate to='/advertisement' />} />
         <Route path='/authorization' element={<Authorization />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/advertisement' element={<Advertisement />} />

@@ -1,5 +1,4 @@
-// usePusherChannel.jsx
-import { useEffect } from 'react';
+/*import { useEffect } from 'react';
 import Echo from 'laravel-echo';
 
 const usePusherChannel = (channelName, eventHandler) => {
@@ -15,4 +14,4 @@ const usePusherChannel = (channelName, eventHandler) => {
     }, [channelName, eventHandler]);
 };
 
-export default usePusherChannel;
+export default usePusherChannel;*/

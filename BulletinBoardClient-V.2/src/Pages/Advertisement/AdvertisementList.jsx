@@ -2,57 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdvertisementItem from './AdvertisementItem.jsx';
 import { loadAd, deleteAd } from '../../utils/api.jsx';
-import usePusherChannel from '../../utils/usePusherChannel.jsx';
+//import usePusherChannel from '../../utils/usePusherChannel.jsx';
 
 function AdvertisementList() {
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [sort, setSort] = useState('asc');
+    const [field, setField] = useState('price');
 
     useEffect(() => {
         handleLoadAd();
-    }, [sort, field]);
-
-    useEffect(() => {
-        localStorage.setItem('sort', sort);
-        localStorage.setItem('field', field);
-    }, [sort, field]);
-
-    useEffect(() => {
-        console.log(window.Echo.connector.pusher.connection.state);
-
-        if (window.Echo) {
-            const channel = window.Echo.channel('advertisements');
-            channel.listen('NewAdvertisementCreated', handleNewAdvertisement);
-
-            return () => {
-                window.Echo.leave('advertisements');
-            };
-        }
-    }, []);
-
+    },[]);
+    /*
+        useEffect(() => {
+            console.log(window.Echo.connector.pusher.connection.state);
+    
+            if (window.Echo) {
+                const channel = window.Echo.channel('advertisements');
+                channel.listen('NewAdvertisementCreated', handleNewAdvertisement);
+    
+                return () => {
+                    window.Echo.leave('advertisements');
+                };
+            }
+        }, []);
+    */
     const handleLoadAd = async () => {
         setLoading(true);
         try {
             const response = await loadAd();
             console.log(response);
-
             setAds(response);
-            setLoading(false);
         } catch (err) {
             setError(err.message);
-            setLoading(false);
+            setLoading(false); 
         }
     };
 
     const handleDeleteAd = async (id) => {
-        try {
-            await deleteAd(id);
-            setAds(ads.filter(ad => ad.id !== id));
-        } catch (err) {
-            setError(err.message);
-        }
+        await deleteAd(id);
+
+        setAds(ads.filter(ad => ad.id !== id));
+
         handleLoadAd();
     };
 
@@ -71,13 +64,14 @@ function AdvertisementList() {
         setField('created_at');
     };
 
+    /*
     const handleNewAdvertisement = (e) => {
         console.log('Событие получено:', e);
         setAds(prevAds => [...prevAds, e.advertisement]);
         alert('Новое объявление добавлено!');
     };
-
-    usePusherChannel('advertisements', handleNewAdvertisement);
+*/
+    //usePusherChannel('advertisements', handleNewAdvertisement);
 
     if (loading) return <p className='text-center'>Загрузка...</p>;
     if (error) return <p className='text-danger text-center'>Ошибка: {error}</p>;

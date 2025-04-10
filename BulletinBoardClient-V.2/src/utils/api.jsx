@@ -27,7 +27,8 @@ export const authorization = async (formData) => {
         body: JSON.stringify({
             email: formData.email,
             password: formData.password,
-        })
+        }),
+        redirect: "follow"
     });
 
     return response;
@@ -60,8 +61,7 @@ export const loadAd = async () => {
         },
     });
 
-    const data = await response.json();
-    return data;
+    return response;
 };
 
 export const deleteAd = async id => {

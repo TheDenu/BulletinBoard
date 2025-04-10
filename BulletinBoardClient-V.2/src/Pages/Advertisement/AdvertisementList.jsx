@@ -59,18 +59,11 @@ function AdvertisementList() {
 
     return (
         <div className='container'>
-            <h2 className='text-center mb-4'>Список объявлений</h2>
-            <button
-                className='btn btn-primary mb-3'
-                onClick={() => navigate('/create')}
-            >
-                Добавить объявление
-            </button>
+            <h2 className='m-4'>Объявления для вас</h2>
             <div className="d-flex gap-2 p-2">
                 <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceAsc}>Сортировать по цене ↑</button>
                 <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceDesc}>Сортировать по цене ↓</button>
             </div>
-            <h2>Объявления для вас</h2>
             {ads.length === 0 ? (
                 <p className='text-center fst-italic text-muted'>Нет объявлений.</p>
             ) : (

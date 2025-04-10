@@ -23,6 +23,7 @@ export function CustomNav() {
       <Link to='/authorization' className="nav-link">Авторизация</Link>
       <Link to='/advertisement' className="nav-link">Объявления</Link>
       <Link to='/like' className="nav-link">Избранное</Link>
+      <Link to='/account' className="nav-link">Аккаунт</Link>
       <Link onClick={handleLogout} className="nav-link">
         Выход
       </Link>

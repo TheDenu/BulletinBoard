@@ -7,7 +7,6 @@ export function CustomNav() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    try {
       const response = await logout();
 
       if (response.status === 204) {
@@ -16,9 +15,6 @@ export function CustomNav() {
       } else {
         throw new Error('Не удалось выполнить выход');
       }
-    } catch (err) {
-      throw new Error(err.message || 'Произошла ошибка при выходе');
-    }
   };
 
   return (

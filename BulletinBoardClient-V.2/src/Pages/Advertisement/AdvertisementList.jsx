@@ -18,7 +18,6 @@ function AdvertisementList() {
         setLoading(true)
         const response = await loadAd();
         const data = await response.json()
-        console.log(data);
 
         if (response.status !== 200) {
             const data = response.text()
@@ -50,21 +49,22 @@ function AdvertisementList() {
             >
                 Добавить объявление
             </button>
-            <div>
-                <button >Сортировать по цене ↑</button>
-                <button >Сортировать по цене ↓</button>
-                <button >Сортировать по дате ↓</button>
+            <div className="d-flex gap-2 p-2">
+                <button className="btn btn-outline-primary btn-sm">Сортировать по цене ↑</button>
+                <button className="btn btn-outline-primary btn-sm">Сортировать по цене ↓</button>
+                <button className="btn btn-outline-primary btn-sm">Сортировать по дате ↓</button>
             </div>
+            <h2>Объявления для вас</h2>
             {ads.length === 0 ? (
                 <p className='text-center fst-italic text-muted'>Нет объявлений.</p>
             ) : (
-                ads.map(ad => (
-                    <AdvertisementItem
-                        key={ad.id}
-                        ad={ad}
-                        onDelete={handleDeleteAd}
-                    />
-                ))
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                    {ads.map(ad => (
+                        <div key={ad.id} className="col">
+                            <AdvertisementItem ad={ad} onDelete={handleDeleteAd} />
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );

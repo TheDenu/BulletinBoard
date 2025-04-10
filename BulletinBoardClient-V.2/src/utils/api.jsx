@@ -47,8 +47,7 @@ export const logout = async () => {
         },
     });
 
-    const data = await response.json();
-    return data;
+    return response;
 };
 
 export const loadAd = async () => {

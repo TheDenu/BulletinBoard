@@ -26,7 +26,6 @@ function AdvertisementList() {
             setAds(data);
         }
         setLoading(false)
-
     };
 
     const handleDeleteAd = async (id) => {
@@ -35,6 +34,24 @@ function AdvertisementList() {
         setAds(ads.filter(ad => ad.id !== id));
 
         handleLoadAd();
+    };
+
+    const sortAds = (ads, order) => {
+        if (order === 'asc') {
+            return [...ads].sort((a, b) => a.price - b.price);
+        } else {
+            return [...ads].sort((a, b) => b.price - a.price);
+        }
+    };
+
+    const handleSortPriceAsc = () => {
+        const sortedAds = sortAds(ads, 'asc');
+        setAds(sortedAds);
+    };
+
+    const handleSortPriceDesc = () => {
+        const sortedAds = sortAds(ads, 'desc');
+        setAds(sortedAds);
     };
 
     if (loading) return <p className='text-center'>Загрузка...</p>;
@@ -50,9 +67,8 @@ function AdvertisementList() {
                 Добавить объявление
             </button>
             <div className="d-flex gap-2 p-2">
-                <button className="btn btn-outline-primary btn-sm">Сортировать по цене ↑</button>
-                <button className="btn btn-outline-primary btn-sm">Сортировать по цене ↓</button>
-                <button className="btn btn-outline-primary btn-sm">Сортировать по дате ↓</button>
+                <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceAsc}>Сортировать по цене ↑</button>
+                <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceDesc}>Сортировать по цене ↓</button>
             </div>
             <h2>Объявления для вас</h2>
             {ads.length === 0 ? (

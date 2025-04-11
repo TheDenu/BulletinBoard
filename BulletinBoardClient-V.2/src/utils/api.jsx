@@ -132,3 +132,19 @@ export const deleteAd = async id => {
         return null;
     }
 }
+
+export const likeAd = async id => {
+    const token = localStorage.getItem('token')
+    const response = await fetch(
+        `${host}/like/${id}`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        }
+    )
+    return response
+}

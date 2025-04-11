@@ -29,7 +29,7 @@ class LikesController extends Controller
 
         $ad->increment('number_likes');
 
-        return response()->json(['message' => 'Advertisement liked successfully.', 'likes_count' => $ad->number_likes], 200);
+        return response()->json(['message' => 'Advertisement liked successfully.', 'likes_count' => $ad->number_likes], 201);
     }
 
     public function getLikes()

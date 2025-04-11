@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AdvertisementItem from './AdvertisementItem.jsx';
-import { loadAd, deleteAd } from '../../utils/api.jsx';
+import { loadAd, likeAd } from '../../utils/api.jsx';
 
 
 function AdvertisementList() {
@@ -23,6 +22,17 @@ function AdvertisementList() {
             setError(data);
         } else {
             setAds(data);
+        }
+        setLoading(false)
+    };
+
+    const handleLikeAd = async (id) => {
+        setLoading(true)
+        const response = await likeAd(id);
+
+        if (response.status !== 201) {
+            const data = response.text()
+            alert(data);
         }
         setLoading(false)
     };
@@ -81,7 +91,7 @@ function AdvertisementList() {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {ads.map(ad => (
                         <div key={ad.id} className="col">
-                            <AdvertisementItem ad={ad} />
+                            <AdvertisementItem ad={ad} onLike={handleLikeAd} />
                         </div>
                     ))}
                 </div>

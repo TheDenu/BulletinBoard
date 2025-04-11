@@ -11,6 +11,7 @@ function AccountFormAdd({ onAdCreated }) {
     });
     const [message, setMessage] = useState('');
     const [imageUrls, setImageUrls] = useState([]);
+    const fileInputRef = React.createRef();
 
     const validate = () => {
         let newErrors = {};
@@ -45,7 +46,10 @@ function AccountFormAdd({ onAdCreated }) {
             const response = await createAd(formData);
 
             if (response.status === 201) {
-                onAdCreated(); // Вызов функции для перехода на вкладку "Мои объявления"
+                onAdCreated(); 
+                fileInputRef.current.value = null;
+                setFormDataState({ ...formDataState, images: [] }); 
+                setImageUrls([]); 
             } else {
                 setMessage('Ошибка при добавлении объявления');
             }
@@ -61,6 +65,16 @@ function AccountFormAdd({ onAdCreated }) {
             setFormDataState({ ...formDataState, [e.target.name]: e.target.value });
         }
         setErrors({ ...errors, [e.target.name]: '' });
+    };
+
+    const handleRemoveImage = (index) => {
+        const newImages = [...formDataState.images];
+        newImages.splice(index, 1);
+        setFormDataState({ ...formDataState, images: newImages });
+        fileInputRef.current.value = null;
+        const newUrls = [...imageUrls];
+        newUrls.splice(index, 1);
+        setImageUrls(newUrls);
     };
 
     return (
@@ -79,11 +93,18 @@ function AccountFormAdd({ onAdCreated }) {
             </div>
             <div className="form-group">
                 <label htmlFor="images">Фотографии:</label>
-                <input type="file" className="form-control mb-2" id="images" multiple onChange={handleChange} />
+                <input type="file" ref={fileInputRef} className="form-control mb-2" id="images" multiple onChange={handleChange} />
                 <div className="row">
                     {imageUrls.map((url, index) => (
-                        <div key={index} className="col-md-3 mb-3">
+                        <div key={index} className="col-md-3 mb-3 position-relative">
                             <img src={url} alt={`Изображение ${index}`} className="img-fluid" />
+                            <button
+                                type="button"
+                                className="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                onClick={() => handleRemoveImage(index)}
+                            >
+                                &times;
+                            </button>
                         </div>
                     ))}
                 </div>

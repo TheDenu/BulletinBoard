@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AdvertisementItem({ ad, onDelete }) {
+function AdvertisementItem({ ad, onLike }) {
     /*
     {ad.photos && ad.photos.length > 0 && (
                     <div className="row">
@@ -26,15 +26,20 @@ function AdvertisementItem({ ad, onDelete }) {
                     <div className="col-md-4 mb-3">
                         <button
                             className='btn btn-danger btn-sm'
+                            onClick={() => onLike(ad.id)}
                         >
                             Лайкнуть
                         </button>
                     </div>
                 </div>
+                <div className="row justify-content-between">
                 <div className="col-md-4 mb-3">
                     <p><b>{ad.price} $</b></p>
                 </div>
-
+                <div className="col-md-4 mb-3">
+                    <p>Лайки <b>{ad.number_likes}</b></p>
+                </div>
+                </div>
             </div>
         </div>
     )

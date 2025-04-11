@@ -49,7 +49,7 @@ class AdvertisementController extends Controller
                 'number_likes' => $ad->number_likes,
                 'photos' => $ad->photos->map(function ($photo) {
                     return [
-                        'image_path' => asset('storage/' . $photo->photo_path),
+                        'photo_path' => asset('storage/' . $photo->photo_path),
                     ];
                 }),
             ];

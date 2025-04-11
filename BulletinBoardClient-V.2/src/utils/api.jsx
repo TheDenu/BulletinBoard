@@ -42,7 +42,7 @@ export const logout = async () => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'
         },
     });
@@ -63,6 +63,35 @@ export const loadAd = async () => {
     return response;
 };
 
+export const loadYourAd = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${host}/advertisements/youAdvertisements`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    });
+
+    return response;
+};
+
+export const createAd = async formData => {
+    const token = localStorage.getItem('token')
+    const response = await fetch(
+        `${host}/advertisements`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        }
+    )
+    return response
+}
+
 export const deleteAd = async id => {
     const token = localStorage.getItem('token')
     const response = await fetch(
@@ -71,8 +100,8 @@ export const deleteAd = async id => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-                Accept: 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
             },
         }
     )

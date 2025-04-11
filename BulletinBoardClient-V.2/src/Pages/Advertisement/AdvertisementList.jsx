@@ -8,7 +8,6 @@ function AdvertisementList() {
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         handleLoadAd();
@@ -26,14 +25,6 @@ function AdvertisementList() {
             setAds(data);
         }
         setLoading(false)
-    };
-
-    const handleDeleteAd = async (id) => {
-        await deleteAd(id);
-
-        setAds(ads.filter(ad => ad.id !== id));
-
-        handleLoadAd();
     };
 
     const sortAds = (ads, order) => {
@@ -61,7 +52,7 @@ function AdvertisementList() {
         <div className='container'>
             <h2 className='m-4'>Объявления для вас</h2>
             <div className="d-flex gap-2 p-2">
-                <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceAsc}>Сортировать по цене ↑</button>
+                <button className='btn btn-outline-primary btn-sm' onClick={handleSortPriceAsc}>Сортировать по цене ↑</button>
                 <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceDesc}>Сортировать по цене ↓</button>
             </div>
             {ads.length === 0 ? (
@@ -70,7 +61,7 @@ function AdvertisementList() {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {ads.map(ad => (
                         <div key={ad.id} className="col">
-                            <AdvertisementItem ad={ad} onDelete={handleDeleteAd} />
+                            <AdvertisementItem ad={ad} />
                         </div>
                     ))}
                 </div>

@@ -9,6 +9,7 @@ import { Header } from './Components/Header/Header';
 import { Authorization } from './Pages/Authorization/Authorization';
 import { Registration } from './Pages/Registration/Registration';
 import { Advertisement } from './Pages/Advertisement/Advertisement';
+import { Account } from './Pages/Account/Account';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/authorization' element={<Authorization />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/advertisement' element={<Advertisement />} />
+        <Route path='/account' element={<Account />} />
       </Routes>
     </Router>
   )

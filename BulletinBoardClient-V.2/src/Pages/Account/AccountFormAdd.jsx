@@ -10,6 +10,7 @@ function AccountFormAdd({ onAdCreated }) {
         images: [],
     });
     const [message, setMessage] = useState('');
+    const [imageUrls, setImageUrls] = useState([]);
 
     const validate = () => {
         let newErrors = {};
@@ -54,6 +55,8 @@ function AccountFormAdd({ onAdCreated }) {
     const handleChange = (e) => {
         if (e.target.type === 'file') {
             setFormDataState({ ...formDataState, images: e.target.files });
+            const urls = Array.from(e.target.files).map((image) => URL.createObjectURL(image));
+            setImageUrls(urls);
         } else {
             setFormDataState({ ...formDataState, [e.target.name]: e.target.value });
         }
@@ -77,6 +80,13 @@ function AccountFormAdd({ onAdCreated }) {
             <div className="form-group">
                 <label htmlFor="images">Фотографии:</label>
                 <input type="file" className="form-control mb-2" id="images" multiple onChange={handleChange} />
+                <div className="row">
+                    {imageUrls.map((url, index) => (
+                        <div key={index} className="col-md-3 mb-3">
+                            <img src={url} alt={`Изображение ${index}`} className="img-fluid" />
+                        </div>
+                    ))}
+                </div>
             </div>
             <button type="submit" className="btn btn-primary">Добавить объявление</button>
             {message && <p className="mt-2">{message}</p>}

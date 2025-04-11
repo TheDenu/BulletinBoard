@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AccountItem from './AccountItem.jsx';
+import FavoriteItem from './FavoriteItem.jsx';
 import { loadFavoriteAd } from '../../utils/api.jsx';
 
 
@@ -38,7 +38,7 @@ function FavoriteList() {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {ads.map(ad => (
                         <div key={ad.id} className="col">
-                            <AccountItem ad={ad} />
+                            <FavoriteItem ad={ad} />
                         </div>
                     ))}
                 </div>

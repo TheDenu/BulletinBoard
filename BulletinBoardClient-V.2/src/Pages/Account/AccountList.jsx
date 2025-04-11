@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FavoriteItem from './FavoriteItem.jsx';
+import AccountItem from './AccountItem.jsx';
 import { loadYourAd, deleteAd } from '../../utils/api.jsx';
 
 
@@ -46,7 +46,7 @@ function AccountList() {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     {ads.map(ad => (
                         <div key={ad.id} className="col">
-                            <FavoriteItem ad={ad} onDelete={handleDeleteAd} />
+                            <AccountItem ad={ad} onDelete={handleDeleteAd} />
                         </div>
                     ))}
                 </div>

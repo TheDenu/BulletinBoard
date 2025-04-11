@@ -27,7 +27,7 @@ function AdvertisementList() {
         setLoading(false)
     };
 
-    const sortAds = (ads, order) => {
+    const sortPriceAds = (ads, order) => {
         if (order === 'asc') {
             return [...ads].sort((a, b) => a.price - b.price);
         } else {
@@ -35,13 +35,31 @@ function AdvertisementList() {
         }
     };
 
+    const sortDataAds = (ads, order) => {
+        if (order === 'asc') {
+            return [...ads].sort((a, b) => a.id - b.id);
+        } else {
+            return [...ads].sort((a, b) => b.id - a.id);
+        }
+    };
+
     const handleSortPriceAsc = () => {
-        const sortedAds = sortAds(ads, 'asc');
+        const sortedAds = sortPriceAds(ads, 'asc');
         setAds(sortedAds);
     };
 
     const handleSortPriceDesc = () => {
-        const sortedAds = sortAds(ads, 'desc');
+        const sortedAds = sortPriceAds(ads, 'desc');
+        setAds(sortedAds);
+    };
+
+    const handleSortDataArc = () => {
+        const sortedAds = sortDataAds(ads, 'asc');
+        setAds(sortedAds);
+    };
+
+    const handleSortDataDesc = () => {
+        const sortedAds = sortDataAds(ads, 'desc');
         setAds(sortedAds);
     };
 
@@ -54,6 +72,8 @@ function AdvertisementList() {
             <div className="d-flex gap-2 p-2">
                 <button className='btn btn-outline-primary btn-sm' onClick={handleSortPriceAsc}>Сортировать по цене ↑</button>
                 <button className="btn btn-outline-primary btn-sm" onClick={handleSortPriceDesc}>Сортировать по цене ↓</button>
+                <button className="btn btn-outline-primary btn-sm" onClick={handleSortDataArc}>Сортировать по дате ↑</button>
+                <button className="btn btn-outline-primary btn-sm" onClick={handleSortDataDesc}>Сортировать по дате ↓</button>
             </div>
             {ads.length === 0 ? (
                 <p className='text-center fst-italic text-muted'>Нет объявлений.</p>

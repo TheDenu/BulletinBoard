@@ -27,7 +27,7 @@ function AccountItem({ ad, onDelete }) {
                     <div className="col-md-6 mb-3">
                         <button
                             className='btn btn-primary btn-sm'
-                            onClick={() => onEdit(ad.id)}
+                            onClick={() => Navigate('/account/update')}
                         >
                             Редактировать
                         </button>

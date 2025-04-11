@@ -19,11 +19,11 @@ function AdvertisementItem({ ad, onLike }) {
 
             </div>
             <div className='card-body'>
-                <div className="row justify-content-between">
-                    <div className="col-md-4 mb-3">
+                <div className="row ">
+                    <div className="col-md-6 mb-3 justify-content-start">
                         <h3 className='mb-0'>{ad.name}</h3>
                     </div>
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 mb-3 justify-content-end">
                         <button
                             className='btn btn-danger btn-sm'
                             onClick={() => onLike(ad.id)}
@@ -32,13 +32,13 @@ function AdvertisementItem({ ad, onLike }) {
                         </button>
                     </div>
                 </div>
-                <div className="row justify-content-between">
-                <div className="col-md-4 mb-3">
-                    <p><b>{ad.price} $</b></p>
-                </div>
-                <div className="col-md-4 mb-3">
-                    <p>Лайки <b>{ad.number_likes}</b></p>
-                </div>
+                <div className="row">
+                    <div className="col-md-6 mb-3 justify-content-start">
+                        <p><b>{ad.price} $</b></p>
+                    </div>
+                    <div className="col-md-6 mb-3 justify-content-end">
+                        <p>Лайки <b>{ad.number_likes}</b></p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import AdvertisementItem from './AdvertisementItem.jsx';
 import { loadAd, likeAd } from '../../utils/api.jsx';
 
-
 function AdvertisementList() {
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,14 +26,13 @@ function AdvertisementList() {
     };
 
     const handleLikeAd = async (id) => {
-        setLoading(true)
         const response = await likeAd(id);
 
         if (response.status !== 201) {
             const data = response.text()
             alert(data);
         }
-        setLoading(false)
+        handleLoadAd();
     };
 
     const sortPriceAds = (ads, order) => {
@@ -99,6 +97,5 @@ function AdvertisementList() {
         </div>
     );
 }
-
 
 export default AdvertisementList;

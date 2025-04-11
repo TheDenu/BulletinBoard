@@ -22,6 +22,7 @@ function App() {
         <Route path='/registration' element={<Registration />} />
         <Route path='/advertisement' element={<Advertisement />} />
         <Route path='/account' element={<Account />} />
+        <Route path='/account/update' element={<Account />} />
       </Routes>
     </Router>
   )

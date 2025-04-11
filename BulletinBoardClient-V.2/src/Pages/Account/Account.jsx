@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AccountList from "./AccountList";
 import AccountFormAdd from "./AccountFormAdd"; 
+import FavoriteList from "./FavoriteList"
 
 
 export function Account() {
@@ -48,7 +49,7 @@ export function Account() {
             </nav>
             {activeTab === 'myAds' && <AccountList />}
             {activeTab === 'addAd' && <AccountFormAdd onAdCreated={handleAdCreated} />}
-            {activeTab === 'favoriteAds' && <FavoriteAds />}
+            {activeTab === 'favoriteAds' && <FavoriteList />}
         </main>
     );
 }

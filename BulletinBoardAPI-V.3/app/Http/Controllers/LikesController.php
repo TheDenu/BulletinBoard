@@ -16,7 +16,7 @@ class LikesController extends Controller
         }
 
         $userId = auth()->id();
-        $existingLike = LikesUser::where('user_id', $userId)->where('ad_id', $ad->id)->first();
+        $existingLike = LikesUser::where('user_id', $userId)->where('advertisement_id', $ad->id)->first();
 
         if ($existingLike) {
             return response()->json(['message' => 'You have already liked this advertisement.'], 409);
@@ -24,7 +24,7 @@ class LikesController extends Controller
 
         LikesUser::create([
             'user_id' => $userId,
-            'ad_id' => $ad->id,
+            'advertisement_id' => $ad->id,
         ]);
 
         $ad->increment('number_likes');
@@ -42,12 +42,12 @@ class LikesController extends Controller
             return [
                 'id' => $ad->id,
                 'name' => $ad->name,
-                'type' => $ad->type,
+                'price' => $ad->price,
                 'description' => $ad->description,
                 'number_likes' => $ad->number_likes,
                 'photos' => $ad->photos->map(function ($photo) {
                     return [
-                        'image_path' => asset('storage/app/public/' . $photo->image_path),
+                        'photo_path' => asset('storage/' . $photo->photo_path),
                     ];
                 }),
             ];

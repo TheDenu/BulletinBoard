@@ -77,6 +77,20 @@ export const loadYourAd = async () => {
     return response;
 };
 
+export const loadFavoriteAd = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${host}/like`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+    });
+
+    return response;
+}
+
 export const createAd = async formData => {
     const token = localStorage.getItem('token')
     const response = await fetch(

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createAd } from '../../utils/api';
 
-function AccountFormAdd() {
+function AccountFormAdd({ onAdCreated }) {
     const [errors, setErrors] = useState({});
     const [formDataState, setFormDataState] = useState({
         name: '',
@@ -76,7 +76,7 @@ function AccountFormAdd() {
             </div>
             <div className="form-group">
                 <label htmlFor="images">Фотографии:</label>
-                <input type="file" className="form-control" id="images" multiple onChange={handleChange} />
+                <input type="file" className="form-control mb-2" id="images" multiple onChange={handleChange} />
             </div>
             <button type="submit" className="btn btn-primary">Добавить объявление</button>
             {message && <p className="mt-2">{message}</p>}

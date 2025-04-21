@@ -36,8 +36,7 @@ export const authorization = async (formData) => {
 
 
 export const logout = async () => {
-    const token = localStorage.getItem('token');
-
+const token = localStorage.getItem('token');
     const response = await fetch(`${host}/logout`, {
         method: 'GET',
         headers: {
@@ -131,6 +130,26 @@ export const deleteAd = async id => {
     } else {
         return null;
     }
+}
+
+export const updateTextAd = async id => {
+    const token = localStorage.getItem('token')
+    const response = await fetch(
+        `${host}/advertisements/${id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        }
+    )
+    return response
+}
+
+export const updatePhotoAd = async id => {
+    
 }
 
 export const likeAd = async id => {

@@ -24,6 +24,7 @@ Route::group([], function () {
 Route::group([], function () {
     Route::middleware('auth:sanctum')->delete('/advertisements/photo/{id}', [PhotoController::class, 'deleteImage']);
     Route::middleware('auth:sanctum')->post('/advertisements/photo/{id}', [PhotoController::class, 'createImage']);
+    Route::middleware('auth:sanctum')->patch('/photos/{photo}', [PhotoController::class, 'update']);
 });
 
 Route::group([], function () {

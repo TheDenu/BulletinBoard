@@ -23,7 +23,8 @@ class PhotoController extends Controller
         return response()->noContent();
     }
 
-    public function createImage(Request $request, $id){
+    public function createImage(Request $request, $id)
+    {
         $ad = Advertisement::findOrFail($id);
 
         $photoPaths = [];
@@ -43,5 +44,30 @@ class PhotoController extends Controller
                 'photo_path' => $photoPath
             ]
         ]);
+    }
+
+    public function update(Request $request, $photoId)
+    {
+        dd($request->hasFile('photo'), $request->file('photo'), $request->all());
+
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:4096',
+        ]);
+
+        $photo = Photo::findOrFail($photoId);
+
+        if (Storage::disk('public')->exists($photo->photo_path)) {
+            Storage::disk('public')->delete($photo->photo_path);
+        }
+
+        $path = $request->file('photo')->store('ads', 'public');
+
+        $photo->photo_path = $path;
+        $photo->save();
+
+        return response()->json([
+            'message' => 'Фото успешно обновлено',
+            'photo' => $photo,
+        ], 203);
     }
 }
